@@ -18,9 +18,8 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 ITEM_PIPELINES = {
-    "trustme_scraper.pipelines.DuplicateFilterPipeline": 100,
-    "trustme_scraper.pipelines.CleaningPipeline": 200,
-    "trustme_scraper.pipelines.JsonCsvExportPipeline": 300,
+    "trustme_scraper.pipelines.CleaningPipeline":         100,  # clean whitespace
+    "trustme_scraper.pipelines.DuplicateFilterPipeline":  200,  # in-memory dedup
+    "trustme_scraper.pipelines.PostgreSQLPipeline":       300,  # save to DB (dedup by fingerprint)
 }
-
 LOG_LEVEL = "INFO"
