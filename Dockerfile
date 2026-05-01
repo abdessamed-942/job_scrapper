@@ -1,4 +1,3 @@
-cat > Dockerfile << 'EOF'
 FROM python:3.12-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -25,4 +24,3 @@ COPY . .
 RUN mkdir -p /app/output
 
 CMD ["bash"]
-EOF

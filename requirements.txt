@@ -11,3 +11,4 @@ lxml==5.2.2
 
 # Utilities
 python-dotenv==1.0.1
+dateparser

@@ -7,3 +7,4 @@ output/
 *.json
 *.csv
 .scrapy/
+output
