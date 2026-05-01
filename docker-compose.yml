@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+
+  # --- Run a single spider ---
+  algeriejob:
+    build: .
+    command: python trustme_scraper/standalone/scrape_algeriejob.py
+    volumes:
+      - ./output:/app/output   # scraped data saved to host
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  trustme:
+    build: .
+    command: scrapy crawl trustme
+    volumes:
+      - ./output:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  emploitic:
+    build: .
+    command: scrapy crawl emploitic
+    volumes:
+      - ./output:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  emploipartner:
+    build: .
+    command: scrapy crawl emploipartner
+    volumes:
+      - ./output:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  # --- Run ALL scrapers at once ---
+  all:
+    build: .
+    command: >
+      sh -c "
+        scrapy crawl trustme &
+        scrapy crawl emploitic &
+        scrapy crawl emploipartner &
+        python trustme_scraper/standalone/scrape_algeriejob.py
+      "
+    volumes:
+      - ./output:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
